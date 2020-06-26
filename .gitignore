@@ -109,3 +109,4 @@ nbproject
 /testnet
 
 __pycache__/
+.vscode/

@@ -90,43 +90,44 @@ namespace cryptonote {
     // uint64_t base_reward = (MONEY_SUPPLY - already_generated_coins) >> emission_speed_factor;
     
     uint64_t base_reward;
-    if(blockchain_height < 21600)
+    
+    if(already_generated_coins < 68400 * COIN)
     {
-      base_reward = 10 * COIN ;
+      base_reward = 19 * COIN ;
     }
-    else if(blockchain_height < 57600)
+    else if(already_generated_coins < 190800 * COIN)
+    {
+      base_reward = 17 * COIN ;
+    }
+    else if(already_generated_coins < 514800 * COIN)
+    {
+      base_reward = 15 * COIN ;
+    }
+    else if(already_generated_coins < 1638000 * COIN)
+    {
+      base_reward = 13 * COIN ;
+    }
+    else if(already_generated_coins < 6390000 * COIN)
+    {
+      base_reward = 11 * COIN ;
+    }
+    else if(already_generated_coins < 11347200 * COIN)
     {
       base_reward = 9 * COIN ;
     }
-    else if(blockchain_height < 129600)
-    {
-      base_reward = 8 * COIN ;
-    }
-    else if(blockchain_height < 273600)
+    else if(already_generated_coins < 15202800 * COIN)
     {
       base_reward = 7 * COIN ;
     }
-    else if(blockchain_height < 561600)
-    {
-      base_reward = 6 * COIN ;
-    }
-    else if(blockchain_height < 1684800)
+    else if(already_generated_coins < 17956800 * COIN)
     {
       base_reward = 5 * COIN ;
     }
-    else if(blockchain_height < 2808000)
-    {
-      base_reward = 4 * COIN ;
-    }
-    else if(blockchain_height < 3931200)
+    else if(already_generated_coins < 19609200 * COIN)
     {
       base_reward = 3 * COIN ;
     }
-    else if(blockchain_height < 5054400)
-    {
-      base_reward = 2 * COIN ;
-    }
-    else if(blockchain_height < 6177600)
+    else if(already_generated_coins < 20160000 * COIN)
     {
       base_reward = 1 * COIN ;
     }
