@@ -102,6 +102,8 @@ namespace tools
     const char *base = user ? "https://downloads.etcoin.xyz/" : "https://updates.etcoin.xyz/";
 #ifdef _WIN32
     static const char *extension = strncmp(buildtag.c_str(), "source", 6) ? (strncmp(buildtag.c_str(), "install-", 8) ? ".zip" : ".exe") : ".tar.bz2";
+#elif defined(__APPLE__)
+    static const char *extension = strncmp(software.c_str(), "etcoin-gui", 10) ? ".tar.bz2" : ".dmg";
 #else
     static const char extension[] = ".tar.bz2";
 #endif
