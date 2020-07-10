@@ -45,17 +45,17 @@ blockchain thus bringing decentralization and fair distribution of supply to its
 
 ```
 Emission Plan | Emission (ET) | Total Supply (ET)
-10 ET/ Block until Blockheight 21,600 |216,000 | 216,000
-9 ET/ Block until Blockheight 57,600 | 324,000 | 540,000
-8 ET/ Block until Blockheight 129,600 | 576,000 | 1,116,000
-7 ET/ Block until Blockheight 273,600 | 1,008,000 | 2,124,000
-6 ET/ Block until Blockheight 561,600 | 1,728,000 | 3,852,000
-5 ET/ Block until Blockheight 1,684,800 | 5,616,000 | 9,468,000
-4 ET/ Block until Blockheight 2,808,000 | 4,492,800 | 13,960,800
-3 ET/ Block until Blockheight 3,931,200 | 3,369,600 | 17,330,400
-2 ET/ Block until Blockheight 5,054,400 | 2,246,400 | 19,576,800
-1 ET/ Block until Blockheight 6,177,600 | 1,123,200 | 20,700,000
-0.5 ET/ Block from Blockheight 6,177,601 onwards adding 262,800 ET/ year to Total Supply
+19 ET/ Block until Blockheight 3,600 |216,000 | 68,400
+17 ET/ Block until Blockheight 10,800 | 324,000 | 190,800
+15 ET/ Block until Blockheight 32,400 | 576,000 | 514,800
+13 ET/ Block until Blockheight 118,800 | 1,008,000 | 1,638,000
+11 ET/ Block until Blockheight 550,800 | 1,728,000 | 6,390,000
+9 ET/ Block until Blockheight 1,101,600 | 5,616,000 | 11,347,200
+7 ET/ Block until Blockheight 1,652,400 | 4,492,800 | 15,202,800
+5 ET/ Block until Blockheight 2,203,200 | 3,369,600 | 17,956,800
+3 ET/ Block until Blockheight 2,754,000 | 2,246,400 | 19,609,200
+1 ET/ Block until Blockheight 3,304,800 | 1,123,200 | 20,160,000
+0.5 ET/ Block from Blockheight 3,304,801 onwards adding 131,400 ET/ year to Total Supply
 ```
 
 #### CLI RPC Commands
