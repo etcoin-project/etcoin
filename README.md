@@ -35,10 +35,10 @@ blockchain thus bringing decentralization and fair distribution of supply to its
 
 ```
 • Block Size – Dynamic
-• Block Time – 60 Seconds
-• Coin Supply - 20,700,000 (No Pre-mine)
+• Block Time – 120 Seconds
+• Coin Supply - 20,160,000 (No Pre-mine)
 • Mining Algorithm – RandomX
-• Block Reward - 10 to 1 ET
+• Block Reward - 19 to 1 ET
 • Other Features – Anonymous Transactions, ASIC Resistant
 ```
 ### Coin Emission and Distribution
