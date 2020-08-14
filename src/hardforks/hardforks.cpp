@@ -66,6 +66,11 @@ const hardfork_t mainnet_hard_forks[] = {
 
   // version 12 starts from block 220, which is on or around the 26th of May, 2020. 
   { 12, 220, 0, 1590443456 },
+
+  //added code for harfork 13
+  //version 13 starts from block 33250 , which is on or around the 15th of Aug, 2020. 
+  { 13, 34000, 0, 1597514541 },
+
 };
 const size_t num_mainnet_hard_forks = sizeof(mainnet_hard_forks) / sizeof(mainnet_hard_forks[0]);
 const uint64_t mainnet_hard_fork_version_1_till = 1009826;

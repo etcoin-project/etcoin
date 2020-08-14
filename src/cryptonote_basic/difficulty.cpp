@@ -33,6 +33,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <vector>
+#include <boost/math/special_functions/round.hpp>
 
 #include "int-util.h"
 #include "crypto/hash.h"
@@ -201,6 +202,7 @@ namespace cryptonote {
   }
 
   difficulty_type next_difficulty(std::vector<uint64_t> timestamps, std::vector<difficulty_type> cumulative_difficulties, size_t target_seconds) {
+
     //cutoff DIFFICULTY_LAG
     if(timestamps.size() > DIFFICULTY_WINDOW)
     {
@@ -238,7 +240,58 @@ namespace cryptonote {
       return 0; // to behave like previous implementation, may be better return max128bit?
     return res.convert_to<difficulty_type>();
   }
+//added code for hardfork 13
+  difficulty_type next_difficulty_13(std::vector<uint64_t> timestamps, std::vector<difficulty_type> cumulative_difficulties, size_t target_seconds) {
+    const int64_t T = static_cast<int64_t>(target_seconds);
+    size_t N = DIFFICULTY_WINDOW_V13;
+    int64_t FTL = static_cast<int64_t>(CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT);
 
+    // Return a difficulty of 1 for first 3 blocks if it's the start of the chain.
+    if (timestamps.size() < 4) {
+      return 1;
+    }
+    // Otherwise, use a smaller N if the start of the chain is less than N+1.
+    else if ( timestamps.size() < N+1 ) {
+      N = timestamps.size() - 1;
+    }
+    // Otherwise make sure timestamps and cumulative_difficulties are correct size.
+    else {
+      timestamps.resize(N+1);
+      cumulative_difficulties.resize(N+1);
+    }
+    // To get an average solvetime to within +/- ~0.1%, use an adjustment factor.
+    // adjust=0.998 for N = 60
+    const double adjust = 0.998;
+    // The divisor k normalizes the LWMA sum to a standard LWMA.
+    const double k = N * (N + 1) / 2;
+
+    double LWMA(0), sum_inverse_D(0), harmonic_mean_D(0), nextDifficulty(0);
+    int64_t solveTime(0);
+    uint64_t difficulty(0), next_difficulty(0);
+
+    // Loop through N most recent blocks. N is most recently solved block.
+    for (size_t i = 1; i <= N; i++) {
+      solveTime = static_cast<int64_t>(timestamps[i]) - static_cast<int64_t>(timestamps[i - 1]);
+      solveTime = std::min<int64_t>((T * 10), std::max<int64_t>(solveTime, -FTL));
+      difficulty = (cumulative_difficulties[i] - cumulative_difficulties[i - 1]).convert_to<uint64_t>();
+      LWMA += (int64_t)(solveTime * i) / k;
+      sum_inverse_D += 1 / static_cast<double>(difficulty);
+    }
+
+    harmonic_mean_D = N / sum_inverse_D;
+
+    // Limit LWMA same as Bitcoin's 1/4 in case something unforeseen occurs.
+    if (static_cast<int64_t>(boost::math::round(LWMA)) < T / 4)
+      LWMA = static_cast<double>(T / 4);
+
+    nextDifficulty = harmonic_mean_D * T / LWMA * adjust;
+
+    // No limits should be employed, but this is correct way to employ a 20% symmetrical limit:
+    // nextDifficulty=max(previous_Difficulty*0.8,min(previous_Difficulty/0.8, next_Difficulty));
+    next_difficulty = static_cast<uint64_t>(nextDifficulty);
+    return next_difficulty;
+  }
+//end
   std::string hex(difficulty_type v)
   {
     static const char chars[] = "0123456789abcdef";

@@ -796,6 +796,10 @@ namespace cryptonote
      * @return the version
      */
     uint8_t get_next_hard_fork_version() const { return m_hardfork->get_next_version(); }
+    
+    //added code for hardfork 13
+    uint64_t get_difficulty_blocks_count() const;
+    //end
 
     /**
      * @brief returns the newest hardfork version voted to be enabled
