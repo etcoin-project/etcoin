@@ -242,6 +242,10 @@ namespace cryptonote {
   }
 //added code for hardfork 13
   difficulty_type next_difficulty_13(std::vector<uint64_t> timestamps, std::vector<difficulty_type> cumulative_difficulties, size_t target_seconds) {
+    //  std::cout  << "timestamps size = " << timestamps.size() 
+    //             << "cumulative_difficulties size = " << cumulative_difficulties.size()
+    //             << std::endl;
+
     const int64_t T = static_cast<int64_t>(target_seconds);
     size_t N = DIFFICULTY_WINDOW_V13;
     int64_t FTL = static_cast<int64_t>(CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT);
@@ -276,9 +280,22 @@ namespace cryptonote {
       difficulty = (cumulative_difficulties[i] - cumulative_difficulties[i - 1]).convert_to<uint64_t>();
       LWMA += (int64_t)(solveTime * i) / k;
       sum_inverse_D += 1 / static_cast<double>(difficulty);
+
+      // std::cout << "======= i = " << i 
+      //     << "\ttimestamps[i] = " << timestamps[i] 
+      //     << "\ttimestamps[i-1]= " << timestamps[i-1]
+      //     << "\tSolveTime = " << solveTime
+      //     << "\tcumulative_difficulties[i] = " << cumulative_difficulties[i]
+      //     << "\tcumulative_difficulties[i-1] = " << cumulative_difficulties[i-1]
+      //     << "\tdifficulty = " << difficulty
+      //     << "\tLWMA = " << LWMA
+      //     << "\tsum_inverse_D = " << sum_inverse_D
+      //     <<  std::endl;
     }
 
     harmonic_mean_D = N / sum_inverse_D;
+    
+
 
     // Limit LWMA same as Bitcoin's 1/4 in case something unforeseen occurs.
     if (static_cast<int64_t>(boost::math::round(LWMA)) < T / 4)
@@ -289,6 +306,14 @@ namespace cryptonote {
     // No limits should be employed, but this is correct way to employ a 20% symmetrical limit:
     // nextDifficulty=max(previous_Difficulty*0.8,min(previous_Difficulty/0.8, next_Difficulty));
     next_difficulty = static_cast<uint64_t>(nextDifficulty);
+    
+    // std::cout << "======= harmonic_mean_D = " << harmonic_mean_D 
+    //           << "\tN = " << N
+    //           << "\tsum_inverse_D = " << sum_inverse_D
+    //           << "\tLWMA = " << LWMA
+    //           << "\tnext_difficulty = " << next_difficulty
+    //           << "\tT = " << T
+    //           <<  std::endl;
     return next_difficulty;
   }
 //end

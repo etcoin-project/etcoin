@@ -937,7 +937,7 @@ start:
   {
     diff = next_difficulty(timestamps, difficulties, target);
   }
-  else
+  else 
   {
     diff = next_difficulty_13(timestamps, difficulties, target);
   }
@@ -5294,7 +5294,9 @@ uint64_t Blockchain::get_difficulty_blocks_count() const
 {
   if(get_current_hard_fork_version() < HF_VERSION_NEW_DIFFICULTY_APPLY)
     return DIFFICULTY_BLOCKS_COUNT;
-  return DIFFICULTY_BLOCKS_COUNT_V13;
+  if(get_current_hard_fork_version() < HF_VERSION_DIFFICULTY_FIX)
+    return DIFFICULTY_BLOCKS_COUNT_V13;
+  return DIFFICULTY_BLOCKS_COUNT_V14;
 }
 //end
 

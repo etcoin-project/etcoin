@@ -86,6 +86,10 @@
 //added code for hardfork 13
 #define DIFFICULTY_WINDOW_V13                           30 // blocks
 #define DIFFICULTY_BLOCKS_COUNT_V13                     DIFFICULTY_WINDOW + 1
+
+//added code for hardfork 14
+#define DIFFICULTY_WINDOW_V14                           30 // blocks
+#define DIFFICULTY_BLOCKS_COUNT_V14                     DIFFICULTY_WINDOW_V14 + 1
 //end
 
 #define CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_SECONDS_V1   DIFFICULTY_TARGET_V1 * CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_BLOCKS
@@ -178,6 +182,7 @@
 #define HF_VERSION_EFFECTIVE_SHORT_TERM_MEDIAN_IN_PENALTY 12
 //add
 #define HF_VERSION_NEW_DIFFICULTY_APPLY         13
+#define HF_VERSION_DIFFICULTY_FIX               14
 //end
 
 #define PER_KB_FEE_QUANTIZATION_DECIMALS        8

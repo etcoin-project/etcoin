@@ -68,8 +68,12 @@ const hardfork_t mainnet_hard_forks[] = {
   { 12, 220, 0, 1590443456 },
 
   //added code for harfork 13
-  //version 13 starts from block 33250 , which is on or around the 15th of Aug, 2020. 
+  //version 13 starts from block 34000 , which is on or around the 15th of Aug, 2020. 
   { 13, 34000, 0, 1597514541 },
+
+  //added code for harfork 14
+  //version 14 starts from block 33250 , which is on or around the 21th of Aug, 2020. 
+  { 14, 34700, 0, 1597977074 },
 
 };
 const size_t num_mainnet_hard_forks = sizeof(mainnet_hard_forks) / sizeof(mainnet_hard_forks[0]);
